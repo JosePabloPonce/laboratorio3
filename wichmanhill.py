@@ -57,7 +57,7 @@ def floatToBits(num):
     return ''.join('{:0>8b}'.format(c) for c in struct.pack('!f', num))
 
 
-def Wichmann_Hill(seedlst,n):
+def Wichmann_Hill(seedlst,n,t2):
     print("------------------------------------------------------Wichman Hill------------------------------------------------------------")
     #n = input("Ingrese la longitud de la cadena de bits:\n")
     numlist = []
@@ -75,7 +75,7 @@ def Wichmann_Hill(seedlst,n):
     for t in numlist:
         #print(trunc(t,10))
         binario = floatToBits(trunc(t,10))
-        binarylist.append(binario)
+        binarylist.append(binario[int(-t2):])
         #print(binario)
         
     concatenacion = ''.join(map(str, binarylist))
@@ -87,7 +87,7 @@ seedlst = [random.randint(1, 30000),random.randint(1, 30000),random.randint(1, 3
 
 
 s1 = img2bits(I)
-s2 = Wichmann_Hill(seedlst, len(s1))
+s2 = Wichmann_Hill(seedlst, len(s1),2)
 s3 = operacionXOR(s1, s2)
 
 I2 = bits2img(s2, I.shape)
